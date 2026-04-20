@@ -12,7 +12,7 @@
 #include <iomanip>
 #include <io.h>
 
-class NNFileManager {
+class NNFileManager { //Neural Networks Files Manager
 public:
     static Dataset getMNISTDatasetFromCSV(const std::string& filePath);
 

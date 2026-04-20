@@ -4,7 +4,7 @@
 #include <memory>
 #include <ctime>
 
-class FNNLayer {
+class FNNLayer { //Feedforward Neural Network's Layer
 public:
 	FNNLayer() = default;
 	FNNLayer(size_t neuronCount, AFunc func = AFunc::LINEAR) : neuronCount(neuronCount), activationFunc(func), activations(neuronCount) {}
