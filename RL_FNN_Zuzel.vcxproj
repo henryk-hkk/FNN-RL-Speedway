@@ -132,19 +132,24 @@
     <ClCompile Include="FNN.hpp" />
     <ClCompile Include="FNNBackpropA.cpp" />
     <ClCompile Include="FNNBackpropA.hpp" />
+    <ClCompile Include="FNNDQNA.cpp" />
     <ClCompile Include="FNNLayers.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mfunc.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="NNFileManager.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dataset.hpp" />
+    <ClInclude Include="FNNDQNA.hpp" />
     <ClInclude Include="LayerVectors.hpp" />
     <ClInclude Include="NNFileManager.hpp" />
     <ClInclude Include="FNNLayers.hpp" />
     <ClInclude Include="mfuncs.hpp" />
     <ClInclude Include="Neuron.hpp" />
+    <ClInclude Include="State.hpp" />
+    <ClInclude Include="Transition.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

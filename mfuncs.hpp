@@ -7,6 +7,7 @@ namespace mfuncs { //Mathematical Functions
 	//get max value
 	double max(double a, double b);
 	double max(const std::vector<double>& vec);
+	size_t maxIndex(const std::vector<double>& vec);
 	//activation functions and their derivatives
 	double linear(double x);
 	double sigmoid(double x);

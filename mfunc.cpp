@@ -10,6 +10,12 @@ double mfuncs::max(const std::vector<double>& vec) {
 		max = (vec[i] > max) ? vec[i] : max;
 	return max;
 }
+size_t mfuncs::maxIndex(const std::vector<double>& vec) {
+	size_t maxInd = 0;
+	for (size_t i{ 1 }; i < vec.size(); i++)
+		maxInd = (vec[i] > vec[maxInd]) ? i : maxInd;
+	return maxInd;
+}
 double mfuncs::linear(double x) {
 	return x;
 };
