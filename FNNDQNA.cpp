@@ -1,6 +1,6 @@
 #include "FNNDQNA.hpp"
 
-FNNDQNA::FNNDQNA(const DQNParams& dqnparams, const FNN& main, const FNN& target): params(dqnparams), main(main), target(target) {
+FNNDQNA::FNNDQNA(const DQNHyperParams& dqnparams, FNN& main, FNN& target): params(dqnparams), main(main), target(target) {
 	params = dqnparams;
 }
 size_t FNNDQNA::act(const State& state) {
@@ -13,26 +13,56 @@ size_t FNNDQNA::act(const State& state) {
 
 }
 
+void FNNDQNA::saveTransition() {
+	/* get current state
+	* get ai action
+	* get reward
+	* get next state
+	* get if finished
+	* Transition transition{currentState, action, reward, nextState};
+	memory.push_back(transition);*/
+}
+
 void FNNDQNA::replayLearn() {
 	if (memory.size() < params.batchSize) return;
 
-	std::vector<Transition> batch;
-	Dataset dataset;
-	//generate random batch
+	auto batch = getMemoryBatch();
+
 	for (const Transition& transition : batch) {
-		double targetValue = transition.reward;
-		if (!transition.finished) {
-			target.process(transition.nextState.vector());
-			std::vector<double> nextQValues = target.getOutput();
-			double maxNextQ = mfuncs::max(nextQValues);
-			targetValue += params.gamma * maxNextQ;
-		}
-		main.process(transition.originalState.vector());
-		std::vector<double> currentQValues = main.getOutput();
+		double targetValue = getTargetValue(transition);
+
+
+		auto currentQValues = getCurrentQValues(transition.originalState.vector());
 		currentQValues[transition.action] = targetValue;
-		dataset.inputVector.push_back(transition.originalState.vector());
-		dataset.desiredOutputVector.push_back(currentQValues);
+
+		FNNBackpropA::trainFNNStep(main, transition.originalState.vector(), currentQValues, learningFactor);
 	}
-	FNNBackpropA::trainFNN(main, dataset, 1, 1);
 	if (params.epsilon > params.epsilonMin) params.epsilon *= params.epsilonDecayRate;
+}
+
+std::vector<Transition> FNNDQNA::getMemoryBatch() {
+	std::vector<Transition> batch;
+	auto indexVec = mfuncs::getNRandomUniqueIntegers(0, memory.size(), params.batchSize);
+	for (size_t i{}; i < indexVec.size(); i++)
+		batch.push_back(memory[indexVec[i]]);
+	return batch;
+}
+
+void FNNDQNA::updateTargetNN() {
+	target = FNN(main);
+}
+
+double FNNDQNA::getTargetValue(const Transition& transition) {
+	double targetValue = transition.reward;
+	if (!transition.finished) {
+		target.process(transition.nextState.vector());
+		std::vector<double> nextQValues = target.getOutput();
+		double maxNextQ = mfuncs::max(nextQValues);
+		targetValue += params.gamma * maxNextQ;
+	}
+}
+
+std::vector<double> FNNDQNA::getCurrentQValues(const std::vector<double>& inputVec) {
+	main.process(inputVec);
+	return main.getOutput();
 }

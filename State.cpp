@@ -11,3 +11,16 @@ std::vector<double> State::vector() const {
 	stateVec.push_back(static_cast<double>(isHitting));
 	return stateVec;
 }
+State::State(
+	std::vector<double> distances, 
+	double absAngle, 
+	double forwardVel, 
+	double sidewaysVel, 
+	double checkpointXY, 
+	double playerXY, 
+	bool isHitting
+): 
+	distances(distances),
+	absAngle({ std::sin(absAngle),std::cos(absAngle) }),
+	isHitting(isHitting)
+{}

@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="DQN">
+      <UniqueIdentifier>{5a308956-693d-455f-8bd5-ffaccc3eaf30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FNN.hpp">
@@ -21,7 +24,7 @@
     <ClCompile Include="Neuron.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="mfunc.cpp">
+    <ClCompile Include="mfuncs.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="AFunc.hpp">
@@ -46,10 +49,10 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="FNNDQNA.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>DQN</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>DQN</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,13 +75,13 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="FNNDQNA.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>DQN</Filter>
     </ClInclude>
     <ClInclude Include="Transition.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>DQN</Filter>
     </ClInclude>
     <ClInclude Include="State.hpp">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>DQN</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

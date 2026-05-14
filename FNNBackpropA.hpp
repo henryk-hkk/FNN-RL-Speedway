@@ -4,6 +4,7 @@
 class FNNBackpropA { //Feedforward Neural Networks Backpropagation Agent
 public:
 	static void trainFNN(FNN& fnn, Dataset& trainingDataset, unsigned epochs, double learningFactor, bool getConsoleOutput = false);
+	static void trainFNNStep(FNN& fnn, std::vector<double> input, std::vector<double> desiredOutput, double learningFactor);
 	static double testFNN(FNN& fnn, Dataset& testDataset);
 protected:
 	static std::vector<std::vector<double>> getErrorsMean(FNN& fnn, std::vector<std::vector<std::vector<double>>> errorsArr, size_t inputsPerIteration);

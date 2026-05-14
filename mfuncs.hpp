@@ -20,6 +20,7 @@ namespace mfuncs { //Mathematical Functions
 	//random number generation
 	double getRandomDouble(double a, double b);
 	int getRandomInteger(int a, int b);
+	std::vector<int> getNRandomUniqueIntegers(int a, int b, size_t n);
 	//vector-digit conversion
 	std::vector<double> convertDigitToOutputVector(unsigned digit);
 	unsigned convertOutputVectorToDigit(const std::vector<double>& outputVector);

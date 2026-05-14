@@ -135,7 +135,7 @@
     <ClCompile Include="FNNDQNA.cpp" />
     <ClCompile Include="FNNLayers.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="mfunc.cpp" />
+    <ClCompile Include="mfuncs.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="NNFileManager.cpp" />
     <ClCompile Include="State.cpp" />

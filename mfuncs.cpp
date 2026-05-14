@@ -59,6 +59,36 @@ int mfuncs::getRandomInteger(int a, int b) {
 	return a + (rand() % (b - a + 1));
 }
 
+std::vector<int> mfuncs::getNRandomUniqueIntegers(int a, int b, size_t n) {
+	size_t len = b - a + 1;
+	
+	if (n < len || n <= 0) return std::vector<int>(0);
+	
+	if (n == len) {
+		std::vector<int> pool;
+		for (size_t i{}; i < n; i++) pool.push_back(a + i);
+		return pool;
+	}
+	
+	std::vector<int> vec(n);
+	size_t count{};
+	while (count < n) {
+		int candidate = getRandomInteger(a, b);
+		bool isDuplicate = false;
+		for (size_t i{}; i < count; i++) {
+			if (vec[i] == candidate) {
+				isDuplicate = true;
+				break;
+			}
+		}
+		if (!isDuplicate) {
+			vec.push_back(candidate);
+			count++;
+		}
+	}
+	return vec;
+}
+
 std::vector<double> mfuncs::convertDigitToOutputVector(unsigned digit) {
 	std::vector<double> outputVector(10, 0);
 	outputVector[digit] = 1;

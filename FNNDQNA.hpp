@@ -4,7 +4,7 @@
 #include <deque>
 #include "FNNBackpropA.hpp"
 
-struct DQNParams { //Deep-Q-Learning parameters
+struct DQNHyperParams { //Deep-Q-Learning parameters
 	double gamma;
 	double epsilon, epsilonMin, epsilonDecayRate;
 	size_t batchSize, stateSize, actionsCount;
@@ -17,15 +17,18 @@ private:
 	FNN& target;
 	std::deque<Transition> memory{};
 
-	DQNParams params;
+	DQNHyperParams params;
+	double learningFactor = 0.001;
 
-	double rng;
+	std::vector<Transition> getMemoryBatch();
+	double getTargetValue(const Transition& transition);
+	std::vector<double> getCurrentQValues(const std::vector<double>& inputVec);
 
 public:
-	FNNDQNA(const DQNParams& dqnparams, const FNN& main, const FNN& target);
+	FNNDQNA(const DQNHyperParams& dqnparams, FNN& main, FNN& target);
 
 	size_t act(const State& state);
-	void saveTransition(const Transition& transition);
+	void saveTransition();
 	void replayLearn();
 	void updateTargetNN();
 

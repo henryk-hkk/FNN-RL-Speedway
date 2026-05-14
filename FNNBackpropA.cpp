@@ -20,6 +20,13 @@ void FNNBackpropA::trainFNN(FNN& fnn, Dataset& trainingDataset, unsigned epochs,
 		}
 	}
 }
+
+void FNNBackpropA::trainFNNStep(FNN& fnn, std::vector<double> input, std::vector<double> desiredOutput, double learningFactor) {
+	std::vector<std::vector<double>> errorsArr;
+	fnn.process(input);
+	errorsArr = getNeuronErrors(fnn, desiredOutput);
+	adjustFNNValues(fnn, errorsArr, learningFactor);
+}
 double FNNBackpropA::testFNN(FNN& fnn, Dataset& testDataset) {
 	size_t correct{};
 	for (size_t i{}; i < testDataset.inputVector.size(); i++) {
