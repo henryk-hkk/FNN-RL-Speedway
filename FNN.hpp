@@ -10,8 +10,9 @@ public:
 	void addInputLayer(size_t layerSize);
 	void addOutputLayer(size_t layerSize);
 	void addLayer(size_t layerSize);
-	void process(const std::vector<double>& inputArr);
+	void cloneWeights(const FNN& other);
 
+	void process(const std::vector<double>& inputArr);
 	std::vector<double> getOutput() const;
 	double getCost(const std::vector<double>& desiredOutput) const;
 };

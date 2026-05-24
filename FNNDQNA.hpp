@@ -5,10 +5,10 @@
 #include "FNNBackpropA.hpp"
 
 struct DQNHyperParams { //Deep-Q-Learning parameters
-	double gamma;
-	double epsilon, epsilonMin, epsilonDecayRate;
-	size_t batchSize, stateSize, actionsCount;
-	size_t memoryCapacity;
+	double gamma;									// Parameter for calculating target Q values
+	double epsilon, epsilonMin, epsilonDecayRate;	// Percentage of randomly chosen actions
+	size_t batchSize, stateSize, actionsCount;		// Memory size parameters for different elements
+	size_t memoryCapacity;							// Max memory size
 };
 
 class FNNDQNA { //FNN Deep-Q-Learning Agent
@@ -25,11 +25,21 @@ private:
 	std::vector<double> getCurrentQValues(const std::vector<double>& inputVec);
 
 public:
-	FNNDQNA(const DQNHyperParams& dqnparams, FNN& main, FNN& target);
+	FNNDQNA(
+		const DQNHyperParams& dqnparams,
+		FNN& main, 
+		FNN& target
+	);
 
 	size_t act(const State& state);
-	void saveTransition();
+
+	void remember(
+		const std::vector<double>& state,
+		size_t action, 
+		double reward,
+		const std::vector<double>& nextState, 
+		bool finished
+	);
 	void replayLearn();
 	void updateTargetNN();
-
 };

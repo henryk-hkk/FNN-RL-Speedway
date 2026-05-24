@@ -2,9 +2,9 @@
 #include "State.hpp"
 
 struct Transition {
-	const State& originalState;
+	std::vector<double> originalState;
 	size_t action;
 	double reward;
-	const State& nextState;
+	std::vector<double> nextState;
 	bool finished;
 };
