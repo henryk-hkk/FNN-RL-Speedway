@@ -14,4 +14,6 @@ int main() {
 	speedwayFNN.addOutputLayer(2);
 	speedwayFNN.setActivationFunction(AFunc::RELU);
 	speedwayFNN.setOutputLayerActivationFunction(AFunc::LINEAR);
+
+	NNFileManager::saveFNN(speedwayFNN, "C:/Users/zimor/Documents");
 }
