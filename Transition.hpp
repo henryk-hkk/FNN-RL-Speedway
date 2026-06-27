@@ -1,5 +1,5 @@
 #pragma once
-#include "State.hpp"
+#include "DQNState.hpp"
 
 struct Transition {
 	std::vector<double> originalState;
@@ -7,4 +7,9 @@ struct Transition {
 	double reward;
 	std::vector<double> nextState;
 	bool finished;
+};
+
+struct DemonstrativeTransition {
+	std::vector<double> state;
+	size_t action;
 };

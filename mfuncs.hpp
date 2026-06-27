@@ -2,6 +2,12 @@
 #include <vector>
 #include <cmath>
 #include <cstdlib>
+#include <ctime>
+#include <random>
+
+constexpr double RELU_LEAKAGE_RATE = 0.05;
+
+static std::mt19937 randomEngine(std::random_device{}());
 
 namespace mfuncs { //Mathematical Functions
 	//get max value
@@ -9,11 +15,13 @@ namespace mfuncs { //Mathematical Functions
 	double max(const std::vector<double>& vec);
 	size_t maxIndex(const std::vector<double>& vec);
 	//activation functions and their derivatives
-	double linear(double x);
-	double sigmoid(double x);
-	double dSigmoid(double x);
-	double ReLU(double x);
-	double dReLU(double x);
+	double linear(double x);		// linear function y = x
+	double sigmoid(double x);		// sigmoid function
+	double dSigmoid(double x);		// sigmoid function derivative
+	double ReLU(double x);			// Rectified Linear Unit function
+	double dReLU(double x);			// Rectified Linear Unit function derivative
+	double lReLU(double x);			// Leaky ReLU
+	double dLReLU(double x);		// Leaky ReLU derivative
 	double tanh(double x);
 	double dTanh(double x);
 	std::vector<double> softmax(const std::vector<double>& vec);

@@ -4,21 +4,23 @@
 #include <deque>
 #include "FNNBackpropA.hpp"
 
+constexpr size_t SUPERVISED_LEARNING_EPOCH_COUNT = 10;
+
 struct DQNHyperParams { //Deep-Q-Learning parameters
-	double gamma;									// Parameter for calculating target Q values
+	double gamma;									// Discount - Parameter for calculating target Q values
 	double epsilon, epsilonMin, epsilonDecayRate;	// Percentage of randomly chosen actions
-	size_t batchSize, stateSize, actionsCount;		// Memory size parameters for different elements
+	double learningFactor;							// Backpropagation learning factor
+	size_t batchSize, actionsCount;					// Memory size parameters for different elements
 	size_t memoryCapacity;							// Max memory size
 };
 
 class FNNDQNA { //FNN Deep-Q-Learning Agent
 private:
-	FNN& main;
-	FNN& target;
+	std::shared_ptr<FNN> main;
+	std::shared_ptr<FNN> target;
 	std::deque<Transition> memory{};
 
 	DQNHyperParams params;
-	double learningFactor = 0.001;
 
 	std::vector<Transition> getMemoryBatch();
 	double getTargetValue(const Transition& transition);
@@ -27,12 +29,18 @@ private:
 public:
 	FNNDQNA(
 		const DQNHyperParams& dqnparams,
-		FNN& main, 
-		FNN& target
+		std::shared_ptr<FNN> main, 
+		std::shared_ptr<FNN> target
 	);
+	DQNHyperParams getParams() const;
+	void setParams(const DQNHyperParams& params);
 
-	size_t act(const State& state);
+	void updateNNs(std::shared_ptr<FNN> main, std::shared_ptr<FNN> target);
 
+	std::shared_ptr<FNN> getTargetNN() const;
+
+	size_t act(const DQNState& state, bool getConsoleOutput = false);
+	size_t act(const std::vector<double>& stateVec, bool getConsoleOutput = false);
 	void remember(
 		const std::vector<double>& state,
 		size_t action, 
@@ -42,4 +50,5 @@ public:
 	);
 	void replayLearn();
 	void updateTargetNN();
+	void supervisedLearning(const std::vector<DemonstrativeTransition>& demonstrations);
 };

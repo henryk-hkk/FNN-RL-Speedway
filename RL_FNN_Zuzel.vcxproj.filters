@@ -16,6 +16,9 @@
     <Filter Include="DQN">
       <UniqueIdentifier>{5a308956-693d-455f-8bd5-ffaccc3eaf30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Agent-Game Bridge">
+      <UniqueIdentifier>{8e38e454-6c58-4ac4-8e89-fdc31f7cdc3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FNN.hpp">
@@ -51,7 +54,13 @@
     <ClCompile Include="FNNDQNA.cpp">
       <Filter>DQN</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
+    <ClCompile Include="Agent_Game_Bridge\SpeedwayState.cpp">
+      <Filter>Agent-Game Bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent_Game_Bridge\DQNAManager.cpp">
+      <Filter>Agent-Game Bridge</Filter>
+    </ClCompile>
+    <ClCompile Include="DQNState.cpp">
       <Filter>DQN</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,8 +89,17 @@
     <ClInclude Include="Transition.hpp">
       <Filter>DQN</Filter>
     </ClInclude>
-    <ClInclude Include="State.hpp">
+    <ClInclude Include="DQNState.hpp">
       <Filter>DQN</Filter>
     </ClInclude>
+    <ClInclude Include="Agent_Game_Bridge\DQNAManager.hpp">
+      <Filter>Agent-Game Bridge</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent_Game_Bridge\SpeedwayState.hpp">
+      <Filter>Agent-Game Bridge</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
