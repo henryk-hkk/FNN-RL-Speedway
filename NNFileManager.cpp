@@ -76,6 +76,7 @@ void NNFileManager::SaveMNISTDatasetToCSV(const Dataset & dataset, const std::st
     file.close();
 }
 void NNFileManager::saveFNN(const FNN& fnn, std::string savePath) {
+    std::locale::global(std::locale("C"));
     std::tm time = getLocalTime();
     size_t layerCount = fnn.layers.size();
     std::ostringstream oss;
@@ -169,7 +170,7 @@ LayerVectors NNFileManager::getFNNLayerVectors(const std::string& filePath) {
     std::stringstream ss(line);
 
     while (std::getline(ss, cell, ','))
-        biases.push_back(std::stod(cell));
+        if(!cell.empty()) biases.push_back(std::stod(cell));
 
     layerBiasFile.close();
 
@@ -178,7 +179,7 @@ LayerVectors NNFileManager::getFNNLayerVectors(const std::string& filePath) {
     while (std::getline(layerWeightsFile, line)) {
         std::stringstream ss(line);
         while (std::getline(ss, cell, ','))
-            row.push_back(std::stod(cell));
+            if (!cell.empty()) row.push_back(std::stod(cell));
         weights.push_back(row);
         row.clear();
     }

@@ -128,6 +128,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AFunc.hpp" />
+    <ClCompile Include="Agent_Game_Bridge\DQNAManager.cpp" />
+    <ClCompile Include="Agent_Game_Bridge\SpeedwayState.cpp" />
+    <ClCompile Include="DQNState.cpp" />
     <ClCompile Include="FNN.cpp" />
     <ClCompile Include="FNN.hpp" />
     <ClCompile Include="FNNBackpropA.cpp" />
@@ -138,18 +141,22 @@
     <ClCompile Include="mfuncs.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="NNFileManager.cpp" />
-    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Agent_Game_Bridge\DQNAManager.hpp" />
+    <ClInclude Include="Agent_Game_Bridge\SpeedwayState.hpp" />
     <ClInclude Include="Dataset.hpp" />
+    <ClInclude Include="DQNState.hpp" />
     <ClInclude Include="FNNDQNA.hpp" />
     <ClInclude Include="LayerVectors.hpp" />
     <ClInclude Include="NNFileManager.hpp" />
     <ClInclude Include="FNNLayers.hpp" />
     <ClInclude Include="mfuncs.hpp" />
     <ClInclude Include="Neuron.hpp" />
-    <ClInclude Include="State.hpp" />
     <ClInclude Include="Transition.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

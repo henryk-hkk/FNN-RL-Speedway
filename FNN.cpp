@@ -36,6 +36,16 @@ void FNN::cloneWeights(const FNN& other) {
 	}
 }
 
+void FNN::cloneWeights(std::shared_ptr<FNN> other) {
+	for (size_t l = 0; l < this->layers.size(); l++) {
+		this->layers[l]->weights = other->layers[l]->weights;
+
+		for (size_t n = 0; n < this->layers[l]->neuronCount; n++) {
+			this->layers[l]->neurons[n]->bias = other->layers[l]->neurons[n]->bias;
+		}
+	}
+}
+
 void FNN::process(const std::vector<double>& inputArr) {
 	FNNInputLayer* inputLayerPtr = dynamic_cast<FNNInputLayer*>(layers[0].get());
 	if (!inputLayerPtr) {

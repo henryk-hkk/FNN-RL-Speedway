@@ -10,7 +10,10 @@ public:
 	void addInputLayer(size_t layerSize);
 	void addOutputLayer(size_t layerSize);
 	void addLayer(size_t layerSize);
+
 	void cloneWeights(const FNN& other);
+	void cloneWeights(std::shared_ptr<FNN> other);
+	
 
 	void process(const std::vector<double>& inputArr);
 	std::vector<double> getOutput() const;

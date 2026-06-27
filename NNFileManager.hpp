@@ -11,6 +11,7 @@
 #include <ctime>
 #include <iomanip>
 #include <io.h>
+#include <locale>
 
 class NNFileManager { //Neural Networks Files Manager
 public:

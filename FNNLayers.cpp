@@ -6,21 +6,28 @@ FNNInputLayer::FNNInputLayer(size_t neuronCount, AFunc func) : FNNLayer(neuronCo
 		neurons.push_back(std::make_unique<Neuron>());
 }
 void FNNLayer::init() {
-	srand(static_cast<unsigned>(std::time(NULL)));
-
 	neurons.reserve(neuronCount);
-	for (size_t i = 0; i < neuronCount; i++)
-		neurons.push_back(std::make_unique<Neuron>(mfuncs::getRandomDouble(0, 1)));
+
+	for (size_t i = 0; i < neuronCount; i++) {
+		neurons.push_back(std::make_unique<Neuron>(0.0));
+	}
 
 	weights.resize(neuronCount);
+
+	if (previous == nullptr || previous->neuronCount == 0) return; // to be safe with input layer
+
+	double std_dev = std::sqrt(2.0 / previous->neuronCount); // standard deviation
+
+	std::normal_distribution<double> dist(0.0, std_dev);
 
 	for (size_t i = 0; i < neuronCount; i++) {
 		weights[i] = std::vector<double>(previous->neuronCount);
 		for (size_t j = 0; j < previous->neuronCount; j++) {
-			weights[i][j] = mfuncs::getRandomInteger(-10, 10) * 0.1;// set [-1;1]
+			weights[i][j] = dist(randomEngine);
 		}
 	}
 }
+
 void FNNLayer::processInput() {
 	auto prevActivations = previous->activations;
 
